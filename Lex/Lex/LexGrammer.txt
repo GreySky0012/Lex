@@ -1,0 +1,58 @@
+%{#include <iostream>
+#include <string>
+#include <stdio.h>
+#include <fstream>
+#include <vector>
+#include <sstream>
+%}
+digit     [0-9]
+char     [a-zA-Z]
+id         {char}[{char}|{digit}]*
+num     {digit}{digit}*
+%%
+num      {return "NUM";}
+id          {return "ID";}
+int        {return "INT";}
+'char'      {return "CHAR";}
++          {return "+";}
+-           {return "-";}
+*           {return "*";}
+/           {return "/";}
+%          {return "%";}
+<          {return "<";}
+>          {return ">";}
+!           {return "!";}
+(           {return "(";}
+)           {return ")";}
+{           {return "{";}
+}           {return "}";}
+=         {return "=";}
+if          {return "IF";}
+else      {return "ELSE";}
+for       {return "FOR";}
+return  {return "RETURN";}
+;           {return ";";}
+%%
+int main()
+{
+	string s;
+	string buf;
+	vector<string> tokens;
+	ifstream infile("textIn.txt",ios::in);
+	ofstream outfile("result.txt",ios::out);
+	while(getline(infile,s)){
+		stringstream ss(s);
+
+		while(ss>>buf)
+		{
+			tokens.push_back(buf);
+			outfile<<analysis(buf)<<" ";
+		}
+		outfile<<endl;
+	}
+	outfile<<"#"<<endl;
+	infile.close();
+	outfile.close();
+	system("pause");
+	return 0;
+}

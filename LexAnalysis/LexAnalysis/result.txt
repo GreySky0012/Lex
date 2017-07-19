@@ -1,0 +1,10 @@
+INT ID ; 
+IF ( ID < NUM ) 
+{ 
+ID = NUM ; 
+} 
+ELSE 
+{ 
+ID = NUM ; 
+} 
+#
